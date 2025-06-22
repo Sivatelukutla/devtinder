@@ -2,12 +2,16 @@ const express = require("express")
 const app = express()
 
 
-app.get("/", (req,res)=>{
-    res.send("this is Home Page")
+app.get("/user", (req,res)=>{
+    res.send({firstName:"siva", second:"telukutla", age:"25"})
 })
 
-app.get("/set", (req,res)=>{
-    res.send("this is Set Data")
+app.post("/user", (req,res)=>{
+    res.send("successfully the data is save")
+})
+
+app.delete("/user", (req,res)=>{
+    res.send("successfully the data is delete")
 })
 
 app.listen(3000, ()=>{
