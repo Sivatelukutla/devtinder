@@ -33,6 +33,42 @@ app.get("/user", async(req,res)=>{
 })
 
 
+//feed api =>gt all users data 
+
+app.get("/feed", async(req,res)=>{
+    
+    try{
+        const dataUser = await user.find({})
+        if(dataUser.length === 0){
+            res.status(400).send("data is not found")
+        }
+        else{
+            res.send(dataUser)
+        }
+    }
+    catch(err){
+        res.send("error", err)
+    }
+})
+
+//findeOne method 
+
+app.get("/users", async(req,res)=>{
+    const userEmailId = req.body.emailId 
+    try{
+        const userD = await user.findOne({emailId:userEmailId})
+        if(userD.length === 0){
+            res.status(400).send("user is not found")
+        }
+        else{
+            res.send(userD)
+        }
+    }catch(err){
+        res.status(400).send("error", err)
+    }
+})
+
+
 connectDB().then(()=>{
     console.log("database is established")
     app.listen(3000, ()=>{
@@ -43,4 +79,5 @@ connectDB().then(()=>{
 })
 
 
-
+//Note => by using findOne its return only first document 
+//note why means => 
