@@ -17,17 +17,17 @@ app.use(express.json())
 //     }
 // })
 
-////////////--------------get all userdata-------------------------------
+//////////--------------get all userdata-------------------------------
 
-// app.get("/user", async(req,res)=>{
+app.get("/user", async(req,res)=>{
     
-//     try{
-//         const data = await user.find({})
-//         res.send(data)
-//     }catch(err){
-//         res.send("error", err)
-//     }
-// })
+    try{
+        const data = await user.find({})
+        res.send(data)
+    }catch(err){
+        res.send("error", err)
+    }
+})
 
 
 
