@@ -68,6 +68,26 @@ app.get("/users", async(req,res)=>{
     }
 })
 
+app.patch("/patch", async (req, res) => {
+  const { emailId} = req.body.emailId;
+  const body = req.body
+
+  try {
+    const updatedUser = await user.findOneAndUpdate(
+      emailId, body          // Return the updated document
+    );
+
+    if (!updatedUser) {
+      return res.status(404).send("User not found");
+    }
+
+    res.send(updatedUser);
+  } catch (err) {
+    res.status(400).send("Error: " + err.message);
+  }
+});
+
+
 
 connectDB().then(()=>{
     console.log("database is established")
