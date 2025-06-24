@@ -5,17 +5,32 @@ const app = express()
 
 app.use(express.json())
 
-app.post("/signup", async(req,res)=>{
-    const users = req.body 
-    try{
-        const userData = new user(users)
-        userData.save()
-        res.send(userData)
-    }
-    catch(err){
-        res.send(err)
-    }
-})
+// app.post("/signup", async(req,res)=>{
+//     const users = req.body 
+//     try{
+//         const userData = new user(users)
+//         userData.save()
+//         res.send(userData)
+//     }
+//     catch(err){
+//         res.send(err)
+//     }
+// })
+
+////////////--------------get all userdata-------------------------------
+
+// app.get("/user", async(req,res)=>{
+    
+//     try{
+//         const data = await user.find({})
+//         res.send(data)
+//     }catch(err){
+//         res.send("error", err)
+//     }
+// })
+
+
+
 
 
 connectDB().then(()=>{
