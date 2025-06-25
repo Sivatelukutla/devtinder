@@ -78,6 +78,77 @@ app.get("/user/:id", async(req,res)=>{
 })
 
 
+//------------------------updata the data--------------------------findByIdAndUpdata 
+
+app.patch("/update/:id", async(req,res)=>{
+    const id = req.params.id
+    const body = req.body 
+    try{
+        if(!id){
+            res.status(400).send("user is not found")
+        }
+        else{
+            const data = await user.findByIdAndUpdate(id,body,{new:true})
+            if(!data){
+                res.status(400).send("user is not found")
+            }else{
+                res.status(200).send(data)
+            }
+        }
+    }catch(err){
+        res.status(400).send(err)
+    }
+})
+
+//-------------------updata the data-------------------findOneAndUpdate 
+
+app.patch("/updatebyemail", async(req,res)=>{
+    const emailId = req.body.emailId
+    const body = req.body 
+    try{
+        if(!emailId){
+            res.status(400).send("user is not found")
+        }
+        else{
+            const data = await user.findOneAndUpdate({emailId : emailId}, body, {new:true})
+            if(!data){
+                res.status(400).send("user is not found")
+            }
+            else{
+                res.status(200).send(data)
+            }
+        }
+    }catch(err){
+        res.status(400).send(err)
+    }
+})
+
+//---------------------------delete the data--------------------------findByIdAndDelete
+
+app.delete("/delete/:id", async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        if (!id) {
+            return res.status(400).send("User ID is required");
+        }
+
+        const data = await user.findByIdAndDelete(id);
+
+        if (!data) {
+            return res.status(404).send("User not found");
+        }
+
+        res.status(200).send("User deleted successfully");
+    } catch (err) {
+        res.status(500).send({
+            error: "Error deleting user",
+            details: err.message,
+        });
+    }
+});
+
+
 
 connectDB().then(() => {
     console.log("database is established")
